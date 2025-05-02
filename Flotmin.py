@@ -66,6 +66,6 @@ class ReseauFlot:
                 print("Chemin non valide")
                 break
             self.appliquer_chemin(chemin)
-        print("\n--- ALGORITHME TERMINÉ ---")
+        print("\n--------------------")
         print(f"Flot total transmis : {self.flot_total}")
         print(f"Coût total du flot : {self.cout_total}")
