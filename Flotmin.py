@@ -51,7 +51,7 @@ class ReseauFlot:
         self.cout_total += flot_envoye * cout_chemin
 
         print(f"\nNouveau chemin trouvé : {' -> '.join(self.noms[u] for u, _ in chemin)} -> {self.noms[chemin[-1][1]]}")
-        print(f"Flot injecté : {flot_envoye}, Coût du chemin : {cout_chemin}")
+        print(f"Flot evnoyé : {flot_envoye}, Coût du chemin : {cout_chemin}")
         print(f"Flot cumulé : {self.flot_total} / {self.val_flot}, Coût cumulé : {self.cout_total}")
 
     def resoudre(self):
