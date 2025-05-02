@@ -13,11 +13,10 @@ def main():
         print("4. Quitter")
         choice = input("Votre choix : ")
 
-        # Quitter si l'utilisateur choisit l'option 4
+    
         if choice == '4':
             break
 
-        # Demander le numéro du fichier
         filenumber = input("Numéro du fichier (1-5 pour options 1-2, 6-10 pour option 3) : ")
         try:
             filenumber = int(filenumber)
@@ -25,7 +24,7 @@ def main():
             print("Erreur : veuillez entrer un nombre valide.")
             continue
 
-        # Vérification du fichier valide en fonction du choix
+        
         if choice in ['1', '2'] and not (1 <= filenumber <= 5):
             print("Erreur : pour Ford-Fulkerson ou Pousser-Réétiqueter, le fichier doit être entre 1 et 5.")
             continue
@@ -33,7 +32,7 @@ def main():
             print("Erreur : pour Flot à coût minimal, le fichier doit être entre 6 et 10.")
             continue
 
-        # Construction du nom du fichier et création du graphe
+        
         filename = f"Graphe{filenumber}.txt"
         try:
             graph = Graph(filename)
@@ -45,7 +44,6 @@ def main():
             print(f"Erreur lors de la lecture du fichier : {e}")
             continue
 
-        # Choix de l'algorithme en fonction de l'entrée
         if choice == '1':
             t0 = time.time()
             ford_fulkerson(graph)
@@ -60,14 +58,14 @@ def main():
             try:
                 flow_val = int(input("Valeur du flot souhaité : "))
                 t0 = time.time()
-                # Création du réseau de flot avec la nouvelle classe ReseauFlot
+               
                 reseau = ReseauFlot(
                     capacites=graph.c.tolist(),
                     couts=graph.cout.tolist(),
                     noms=graph.noms_sommets(),
                     val_flot=flow_val
                 )
-                # Résolution du problème de flot à coût minimal
+                
                 reseau.resoudre()
                 t1 = time.time()
             except ValueError:
