@@ -49,27 +49,6 @@ class Graph:
         return ['s'] + [chr(ord('a') + i) for i in range(0, self.n - 2)] + ['t']
 
 
-    def AfficherParents(self, parent):
-        noms = self.noms_sommets()
-        groupes = {}  # Dictionnaire pour organiser les groupes par nombre de lettres dans leur nom.
-        
-        group_size = 3  # Nombre de sommets par groupe (par exemple, 3 pour "abc", "def")
-        for i in range(0, self.n - 2, group_size):
-            groupe_name = ''.join(noms[i:i + group_size])  # Crée un nom comme "abc", "def"
-            groupes[groupe_name] = [i + j for j in range(group_size) if i + j < self.n - 1]
-
-        # Ajoute le dernier sommet 't'
-        groupes['t'] = [self.n - 1]
-
-        # Affichage des parents
-        for groupe, indices in groupes.items():
-            ligne = f"{groupe} : "
-            elements = []
-            for i in indices:
-                if parent[i] != -1:
-                    elements.append(f"Π({noms[i]}) = {noms[parent[i]]}")
-            if elements:
-                print(ligne + " , ".join(elements))
 
     def print_matrices(self):
         print("\nMatrice des capacités :")
