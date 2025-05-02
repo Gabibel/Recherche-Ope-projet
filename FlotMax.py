@@ -99,43 +99,57 @@ def ford_fulkerson(graphe):
     print(f"\nFlot maximal trouvé: {flotmax}")
     return flotmax
 
-
 def push_relabel(graphe):
     print("\nDébut de l'algorithme Pousser-Réétiqueter")
+    n = graphe.n
+    s = graphe.source
+    t = graphe.g
+
+    # Initialisation
     graphe.reste = graphe.c - graphe.flot
-    h = [0] * graph.n
-    e = [0] * graph.n
-    h[graphe.source] = graphe.n
-    for v in range(graphe.n):
-        if graphe.c[graph.source][v] > 0:
-            graphe.flot[graphe.source][v] = graphe.c[graphe.source][v]
-            graphe.flot[v][graphe.source] = -graphe.flot[graphe.source][v]
-            e[v] = graphe.flot[graph.source][v]
-            e[graphe.source] -= graphe.flot[graphe.source][v]
-    active = [i for i in range(graphe.n) if i != graphe.source and i != graphe.g and e[i] > 0]
+    h = [0] * n
+    e = [0] * n
+    h[s] = n
+
+    # Pré-flux depuis la source
+    for v in range(n):
+        if graphe.c[s][v] > 0:
+            flow = graphe.c[s][v]
+            graphe.flot[s][v] = flow
+            graphe.flot[v][s] = -flow
+            graphe.reste[s][v] -= flow
+            graphe.reste[v][s] += flow
+            e[v] = flow
+            e[s] -= flow
+
+    active = [i for i in range(n) if i != s and i != t and e[i] > 0]
+
     while active:
         u = active[0]
-        temp2 = False
-        for v in range(graphe.n):
+        pushed = False
+        for v in range(n):
             if graphe.reste[u][v] > 0 and h[u] == h[v] + 1:
                 delta = min(e[u], graphe.reste[u][v])
+                graphe.flot[u][v] += delta
+                graphe.flot[v][u] -= delta
                 graphe.reste[u][v] -= delta
-                graph.reste[v][u] += delta
+                graphe.reste[v][u] += delta
                 e[u] -= delta
                 e[v] += delta
                 print(f"Poussée de {delta} de v{u+1} vers v{v+1}")
-                if v != graphe.source and v != graphe.g and v not in active and e[v] > 0:
+                if v != s and v != t and v not in active and e[v] > 0:
                     active.append(v)
                 if e[u] == 0:
                     break
-                temp2 = True
-        if not temp2:
-            min_h = min([h[v] for v in range(graphe.n) if graphe.reste[u][v] > 0], default=float('inf'))
+                pushed = True
+        if not pushed:
+            min_h = min([h[v] for v in range(n) if graphe.reste[u][v] > 0], default=float('inf'))
             h[u] = min_h + 1
             print(f"Réétiquetage de v{u+1} à hauteur {h[u]}")
         if e[u] == 0:
             active.pop(0)
+
     graphe.Finalflot()
-    flotmax = sum(graphe.flot[graphe.source][i] for i in range(graphe.n))
+    flotmax = sum(graphe.flot[s][i] for i in range(n))
     print(f"\nFlot maximal trouvé: {flotmax}")
     return flotmax
