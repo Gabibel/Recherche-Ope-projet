@@ -14,7 +14,8 @@ def main():
         choice = input("Votre choix : ")
         if choice == '4':
             break
-        filename = input("Nom du fichier : ")
+        filenumber = input("Nom du fichier : ")
+        filename = "Graphe"+ filenumber +".txt"
         graph = Graph(filename)
         graph.print_matrices()
         if choice == '1':

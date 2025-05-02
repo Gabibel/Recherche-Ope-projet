@@ -32,14 +32,44 @@ class Graph:
         self.reste = np.copy(self.c)
 
     def AfficherMatrice(self, matrice):
-        n = self.n
-        temp = max(len(str(matrice[i][j])) for i in range(n) for j in range(n)) + 3
-        matrice2 = " " * (temp + 1) + "".join(f"v{j+1}".center(temp) for j in range(n))
-        print(matrice2)
-        for i in range(n):
-            row = f"v{i+1}".ljust(temp + 1)
-            row += "".join(str(matrice[i][j]).center(temp) for j in range(n))
-            print(row)
+        noms = ['s'] + [chr(ord('a') + i) for i in range(0, self.n - 2)] + ['t']
+        temp = max(len(str(matrice[i][j])) for i in range(self.n) for j in range(self.n)) + 3
+
+        # En-tête des colonnes
+        en_tete = " " * (temp + 1) + "".join(n.center(temp) for n in noms)
+        print(en_tete)
+
+        # Corps de la matrice avec noms de lignes
+        for i in range(self.n):
+            ligne = noms[i].ljust(temp + 1)
+            ligne += "".join(str(matrice[i][j]).center(temp) for j in range(self.n))
+            print(ligne)
+
+    def noms_sommets(self):
+        return ['s'] + [chr(ord('a') + i) for i in range(0, self.n - 2)] + ['t']
+
+
+    def AfficherParents(self, parent):
+        noms = self.noms_sommets()
+        groupes = {}  # Dictionnaire pour organiser les groupes par nombre de lettres dans leur nom.
+        
+        group_size = 3  # Nombre de sommets par groupe (par exemple, 3 pour "abc", "def")
+        for i in range(0, self.n - 2, group_size):
+            groupe_name = ''.join(noms[i:i + group_size])  # Crée un nom comme "abc", "def"
+            groupes[groupe_name] = [i + j for j in range(group_size) if i + j < self.n - 1]
+
+        # Ajoute le dernier sommet 't'
+        groupes['t'] = [self.n - 1]
+
+        # Affichage des parents
+        for groupe, indices in groupes.items():
+            ligne = f"{groupe} : "
+            elements = []
+            for i in indices:
+                if parent[i] != -1:
+                    elements.append(f"Π({noms[i]}) = {noms[parent[i]]}")
+            if elements:
+                print(ligne + " , ".join(elements))
 
     def print_matrices(self):
         print("\nMatrice des capacités :")
@@ -53,7 +83,15 @@ class Graph:
         self.AfficherMatrice(self.flot)
 
     def Finalflot(self):
+        matrice_flot = [[""] * self.n for _ in range(self.n)]
+
         for i in range(self.n):
             for j in range(self.n):
                 if self.c[i][j] > 0:
-                    self.flot[i][j] = self.c[i][j] - self.reste[i][j]
+                    flot_ij = self.c[i][j] - self.reste[i][j]
+                    matrice_flot[i][j] = f"{flot_ij}/{self.c[i][j]}"
+                else:
+                    matrice_flot[i][j] = "0"
+
+        print("\nFlot final (format flot/capacité) :")
+        self.AfficherMatrice(matrice_flot)

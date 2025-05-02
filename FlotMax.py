@@ -23,6 +23,7 @@ def ford_fulkerson(graphe):
     print("\nDébut de l'algorithme Ford-Fulkerson")
     while bfs(graphe, parent):
         print(f"\n⋆ Itération {ite}:")
+        graphe.AfficherParents(parent)
         cheminflot = float("inf")
         s = graphe.g
         chemin = []
@@ -32,7 +33,9 @@ def ford_fulkerson(graphe):
             s = parent[s]
         chemin.append(graphe.source)
         chemin.reverse()
-        print("Chaîne améliorante trouvée:", " → ".join([f"v{p+1}" for p in chemin]), f"de flot {cheminflot}")
+        noms = graphe.noms_sommets()
+        print("Chaîne améliorante trouvée:", " → ".join([noms[p] for p in chemin]), f"de flot {cheminflot}")
+
         v = graphe.g
         while v != graphe.source:
             u = parent[v]
@@ -43,7 +46,6 @@ def ford_fulkerson(graphe):
         graphe.AfficherMatrice(graphe.reste)
         flotmax += cheminflot
         ite += 1
-    graphe.Finalflot()
     print(f"\nFlot maximal trouvé: {flotmax}")
     return flotmax
 
