@@ -60,16 +60,16 @@ def main():
             try:
                 flow_val = int(input("Valeur du flot souhaité : "))
                 t0 = time.time()
-                # Correction ici: utiliser graph.c au lieu de graph.capacite qui n'existe pas
-                # et graph.noms_sommets() pour avoir les noms des sommets
-                flot_total, cout_total = executer_flot_min_cout(
-                    graph.c.tolist(), 
-                    graph.cout.tolist(), 
-                    graph.noms_sommets(), 
-                    flow_val
+                # Création du réseau de flot avec la nouvelle classe ReseauFlot
+                reseau = ReseauFlot(
+                    capacites=graph.c.tolist(),
+                    couts=graph.cout.tolist(),
+                    noms=graph.noms_sommets(),
+                    val_flot=flow_val
                 )
+                # Résolution du problème de flot à coût minimal
+                reseau.resoudre()
                 t1 = time.time()
-                print(f"\nRésultat final - Flot total: {flot_total}, Coût total: {cout_total}")
             except ValueError:
                 print("Erreur : veuillez entrer une valeur de flot valide.")
                 continue
