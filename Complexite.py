@@ -7,7 +7,7 @@ import FlotMax
 import Flotmin
 from Graphe import Graph
 import matplotlib.pyplot as plt
-
+import csv
 
 
 # generer graphe au hasard avec n sommets
@@ -62,43 +62,48 @@ def time_execution_flotmin(graphe):
 
 def generer_et_tracer_nuage_de_points(n):
     num_tests = 100
-    # tableau des temps
     temps_ford_fulkerson_individual = []
     temps_push_relabel_individual = []
     temps_flot_min_individual = []
 
     print(f"Génération du graphe pour n = {n}")
-    # nombre aleatoire
-    graphe = generate_random_graphe(n)  # Utilise la fonction que tu as écrite
-    compteur=0
+    graphe = generate_random_graphe(n)
+    
+    # Nom du fichier CSV
+    filename = f"resultats_n_{n}.csv"
 
-    # Répéter num_tests fois le test pour chaque algorithme
-    for _ in range(num_tests):
-        # on calcule les temps
-        temps_ford_fulkerson_individual.append(time_execution_ford_fulkerson(graphe))
-        temps_push_relabel_individual.append(time_execution_push_relabel(graphe))
-        temps_flot_min_individual.append(time_execution_flotmin(graphe))
-        compteur+=1
-        print('-----------------------------',compteur,"-----------------------------")
+    # Ouvrir le fichier CSV pour écriture
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Itération", "Ford-Fulkerson", "Push-Relabel", "Flot Min"])
 
-    # nuage de points
+        for i in range(1, num_tests + 1):
+            tf = time_execution_ford_fulkerson(graphe)
+            tp = time_execution_push_relabel(graphe)
+            tm = time_execution_flotmin(graphe)
+
+            # Sauvegarder dans les listes pour affichage
+            temps_ford_fulkerson_individual.append(tf)
+            temps_push_relabel_individual.append(tp)
+            temps_flot_min_individual.append(tm)
+
+            # Écrire la ligne dans le fichier CSV
+            writer.writerow([i, tf, tp, tm])
+            print('-----------------------------', i, "-----------------------------")
+
+    # Nuage de points
     plt.figure(figsize=(10, 6))
-
-    # Utiliser une valeur constante pour l'axe x
-    x_values = [n] * num_tests  # Tous les points auront x = n
+    x_values = [n] * num_tests
 
     plt.scatter(x_values, temps_ford_fulkerson_individual, color='blue', label='Ford-Fulkerson')
     plt.scatter(x_values, temps_push_relabel_individual, color='green', label='Pousser-Réétiqueter')
     plt.scatter(x_values, temps_flot_min_individual, color='red', label='Flot à coût minimal')
 
-    # Ajouter des labels et un titre
     plt.xlabel("Taille du graphe (n)")
     plt.ylabel("Temps d'exécution (secondes)")
     plt.title("Temps d'exécution des algorithmes pour n = {}".format(n))
     plt.legend()
-
-    # Afficher le graphique
     plt.show()
 
 
-generer_et_tracer_nuage_de_points(20) # a faire avec tt les nombres demandés
+generer_et_tracer_nuage_de_points(400) # a faire avec tt les nombres demandés
