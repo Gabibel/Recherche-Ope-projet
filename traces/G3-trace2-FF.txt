@@ -1,0 +1,179 @@
+Matrice des capacités :
+        s    a    b    c    d    e    f    g    h    t  
+s       0    16   3    8    0    0    0    0    0    0  
+a       0    0    3    0    3    3    4    0    0    0  
+b       0    0    0    7    0    5    0    0    0    0  
+c       0    0    0    0    0    0    0    0    7    0  
+d       0    0    0    0    0    0    1    8    0    0  
+e       0    0    0    0    8    0    0    0    0    0  
+f       0    0    0    0    0    0    0    0    0    8  
+g       0    0    0    0    0    0    3    0    4    6  
+h       0    0    0    0    0    4    0    0    0    8  
+t       0    0    0    0    0    0    0    0    0    0
+
+Début de l'algorithme Ford-Fulkerson
+
+⋆ Itération 1:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+defh : Π(d) = a , Π(e) = a , Π(f) = a , Π(h) = c
+gt : Π(g) = d , Π(t) = f
+Chaîne améliorante trouvée: s → a → f → t de flot 4
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    g    h    t
+s       0    12   3    8    0    0    0    0    0    0
+a       4    0    3    0    3    3    0    0    0    0
+b       0    0    0    7    0    5    0    0    0    0
+c       0    0    0    0    0    0    0    0    7    0
+d       0    0    0    0    0    0    1    8    0    0
+e       0    0    0    0    8    0    0    0    0    0
+f       0    4    0    0    0    0    0    0    0    4
+g       0    0    0    0    0    0    3    0    4    6
+h       0    0    0    0    0    4    0    0    0    8
+t       0    0    0    0    0    0    4    0    0    0
+
+⋆ Itération 2:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+deh : Π(d) = a , Π(e) = a , Π(h) = c
+fgt : Π(f) = d , Π(g) = d , Π(t) = h
+Chaîne améliorante trouvée: s → c → h → t de flot 7
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    g    h    t
+s       0    12   3    1    0    0    0    0    0    0
+a       4    0    3    0    3    3    0    0    0    0
+b       0    0    0    7    0    5    0    0    0    0
+c       7    0    0    0    0    0    0    0    0    0
+d       0    0    0    0    0    0    1    8    0    0
+e       0    0    0    0    8    0    0    0    0    0
+f       0    4    0    0    0    0    0    0    0    4
+g       0    0    0    0    0    0    3    0    4    6
+h       0    0    0    7    0    4    0    0    0    1
+t       0    0    0    0    0    0    4    0    7    0
+
+⋆ Itération 3:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+deh : Π(d) = a , Π(e) = a , Π(h) = c
+fg : Π(f) = d , Π(g) = d
+t : Π(t) = f
+Chaîne améliorante trouvée: s → a → d → f → t de flot 1
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    g    h    t
+s       0    11   3    1    0    0    0    0    0    0
+a       5    0    3    0    2    3    0    0    0    0
+b       0    0    0    7    0    5    0    0    0    0
+c       7    0    0    0    0    0    0    0    0    0
+d       0    1    0    0    0    0    0    8    0    0
+e       0    0    0    0    8    0    0    0    0    0
+f       0    4    0    0    1    0    0    0    0    3
+g       0    0    0    0    0    0    3    0    4    6
+h       0    0    0    7    0    4    0    0    0    1
+t       0    0    0    0    0    0    5    0    7    0
+
+⋆ Itération 4:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+de : Π(d) = a , Π(e) = a
+g : Π(g) = d
+fht : Π(f) = g , Π(h) = g , Π(t) = g
+Chaîne améliorante trouvée: s → a → d → g → t de flot 2
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   g   h   t
+s     0   9   3   1   0   0   0   0   0   0
+a     7   0   3   0   0   3   0   0   0   0
+b     0   0   0   7   0   5   0   0   0   0
+c     7   0   0   0   0   0   0   0   0   0
+d     0   3   0   0   0   0   0   6   0   0
+e     0   0   0   0   8   0   0   0   0   0
+f     0   4   0   0   1   0   0   0   0   3
+g     0   0   0   0   2   0   3   0   4   4
+h     0   0   0   7   0   4   0   0   0   1
+t     0   0   0   0   0   0   5   2   7   0
+
+⋆ Itération 5:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+e : Π(e) = a
+d : Π(d) = e
+g : Π(g) = d
+fht : Π(f) = g , Π(h) = g , Π(t) = g
+Chaîne améliorante trouvée: s → a → e → d → g → t de flot 3
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    g    h    t  
+s       0    6    3    1    0    0    0    0    0    0
+a       10   0    3    0    0    0    0    0    0    0
+b       0    0    0    7    0    5    0    0    0    0
+c       7    0    0    0    0    0    0    0    0    0
+d       0    3    0    0    0    3    0    3    0    0
+e       0    3    0    0    5    0    0    0    0    0
+f       0    4    0    0    1    0    0    0    0    3
+g       0    0    0    0    5    0    3    0    4    1
+h       0    0    0    7    0    4    0    0    0    1
+t       0    0    0    0    0    0    5    5    7    0
+
+⋆ Itération 6:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+e : Π(e) = b
+d : Π(d) = e
+g : Π(g) = d
+fht : Π(f) = g , Π(h) = g , Π(t) = g
+Chaîne améliorante trouvée: s → b → e → d → g → t de flot 1
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    g    h    t
+s       0    6    2    1    0    0    0    0    0    0
+a       10   0    3    0    0    0    0    0    0    0
+b       1    0    0    7    0    4    0    0    0    0
+c       7    0    0    0    0    0    0    0    0    0
+d       0    3    0    0    0    4    0    2    0    0
+e       0    3    1    0    4    0    0    0    0    0
+f       0    4    0    0    1    0    0    0    0    3
+g       0    0    0    0    6    0    3    0    4    0
+h       0    0    0    7    0    4    0    0    0    1
+t       0    0    0    0    0    0    5    6    7    0
+
+⋆ Itération 7:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+e : Π(e) = b
+d : Π(d) = e
+g : Π(g) = d
+fh : Π(f) = g , Π(h) = g
+t : Π(t) = f
+Chaîne améliorante trouvée: s → b → e → d → g → f → t de flot 2
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    g    h    t
+s       0    6    0    1    0    0    0    0    0    0
+a       10   0    3    0    0    0    0    0    0    0
+b       3    0    0    7    0    2    0    0    0    0
+c       7    0    0    0    0    0    0    0    0    0
+d       0    3    0    0    0    6    0    0    0    0
+e       0    3    3    0    2    0    0    0    0    0
+f       0    4    0    0    1    0    0    2    0    1
+g       0    0    0    0    8    0    1    0    4    0
+h       0    0    0    7    0    4    0    0    0    1
+t       0    0    0    0    0    0    7    6    7    0
+
+Flot maximal trouvé: 20
+
+Flot final (format flot/capacité) :
+            s       a       b       c       d       e       f       g       h       t
+s           0     10/16    3/3     7/8      0       0       0       0       0       0
+a           0       0      0/3      0      3/3     3/3     4/4      0       0       0
+b           0       0       0      0/7      0      3/5      0       0       0       0
+c           0       0       0       0       0       0       0       0      7/7      0    
+d           0       0       0       0       0       0      1/1     8/8      0       0
+e           0       0       0       0      6/8      0       0       0       0       0
+f           0       0       0       0       0       0       0       0       0      7/8
+g           0       0       0       0       0       0      2/3      0      0/4     6/6
+h           0       0       0       0       0      0/4      0       0       0      7/8
+t           0       0       0       0       0       0       0       0       0       0
+Temps d'exécution : 0.0250 s

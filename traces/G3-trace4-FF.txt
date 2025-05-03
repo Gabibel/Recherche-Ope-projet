@@ -1,0 +1,102 @@
+Matrice des capacités :
+      s   a   b   c   d   e   f   t
+s     0   5   0   9   0   0   0   0
+a     0   0   7   0   0   0   0   0
+b     0   0   0   0   4   3   0   0
+c     0   0   4   0   0   6   5   0
+d     0   0   0   0   0   6   0   6
+e     0   0   0   0   0   0   0   5
+f     0   0   0   0   0   0   0   7
+t     0   0   0   0   0   0   0   0
+
+Début de l'algorithme Ford-Fulkerson
+
+⋆ Itération 1:
+Parcours en largeur :
+s :
+ac : Π(a) = s , Π(c) = s
+bef : Π(b) = a , Π(e) = c , Π(f) = c
+dt : Π(d) = b , Π(t) = e
+Chaîne améliorante trouvée: s → c → e → t de flot 5
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   t
+s     0   5   0   4   0   0   0   0
+a     0   0   7   0   0   0   0   0
+b     0   0   0   0   4   3   0   0
+c     5   0   4   0   0   1   5   0
+d     0   0   0   0   0   6   0   6
+e     0   0   0   5   0   0   0   0
+f     0   0   0   0   0   0   0   7
+t     0   0   0   0   0   5   0   0
+
+⋆ Itération 2:
+Parcours en largeur :
+s :
+ac : Π(a) = s , Π(c) = s
+bef : Π(b) = a , Π(e) = c , Π(f) = c
+dt : Π(d) = b , Π(t) = f
+Chaîne améliorante trouvée: s → c → f → t de flot 4
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   t
+s     0   5   0   0   0   0   0   0
+a     0   0   7   0   0   0   0   0
+b     0   0   0   0   4   3   0   0
+c     9   0   4   0   0   1   1   0
+d     0   0   0   0   0   6   0   6
+e     0   0   0   5   0   0   0   0
+f     0   0   0   4   0   0   0   3
+t     0   0   0   0   0   5   4   0
+
+⋆ Itération 3:
+Parcours en largeur :
+s :
+ac : Π(a) = s , Π(c) = s
+bf : Π(b) = a , Π(f) = c
+de : Π(d) = b , Π(e) = b
+t : Π(t) = d
+Chaîne améliorante trouvée: s → a → b → d → t de flot 4
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   t
+s     0   1   0   0   0   0   0   0
+a     4   0   3   0   0   0   0   0
+b     0   4   0   0   0   3   0   0
+c     9   0   4   0   0   1   1   0
+d     0   0   4   0   0   6   0   2
+e     0   0   0   5   0   0   0   0
+f     0   0   0   4   0   0   0   3
+t     0   0   0   0   4   5   4   0
+
+⋆ Itération 4:
+Parcours en largeur :
+s :
+a : Π(a) = s
+b : Π(b) = a
+de : Π(d) = b , Π(e) = b
+c : Π(c) = e
+f : Π(f) = c
+t : Π(t) = f
+Chaîne améliorante trouvée: s → a → b → e → c → f → t de flot 1
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   t
+s     0   0   0   0   0   0   0   0
+a     5   0   2   0   0   0   0   0
+b     0   5   0   0   0   2   0   0
+c     9   0   4   0   0   2   0   0
+d     0   0   4   0   0   6   0   2
+e     0   0   1   4   0   0   0   0
+f     0   0   0   5   0   0   0   2
+t     0   0   0   0   4   5   5   0
+
+Flot maximal trouvé: 14
+
+Flot final (format flot/capacité) :
+         s     a     b     c     d     e     f     t
+s        0    5/5    0    9/9    0     0     0     0
+a        0     0    5/7    0     0     0     0     0
+b        0     0     0     0    4/4   1/3    0     0
+c        0     0    0/4    0     0    4/6   5/5    0
+d        0     0     0     0     0    0/6    0    4/6
+e        0     0     0     0     0     0     0    5/5
+f        0     0     0     0     0     0     0    5/7
+t        0     0     0     0     0     0     0     0
+Temps d'exécution : 0.0193 s

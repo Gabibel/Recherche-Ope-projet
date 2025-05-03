@@ -1,0 +1,133 @@
+Matrice des capacités :
+        s    a    b    c    d    e    f    g    h    t
+s       0    16   3    8    0    0    0    0    0    0
+a       0    0    3    0    3    3    4    0    0    0
+b       0    0    0    7    0    5    0    0    0    0
+c       0    0    0    0    0    0    0    0    7    0
+d       0    0    0    0    0    0    1    8    0    0
+e       0    0    0    0    8    0    0    0    0    0
+f       0    0    0    0    0    0    0    0    0    8
+g       0    0    0    0    0    0    3    0    4    6
+h       0    0    0    0    0    4    0    0    0    8
+t       0    0    0    0    0    0    0    0    0    0
+
+Début de l'algorithme Pousser-Réétiqueter
+
+Réétiquetage de v2 à hauteur 1
+Poussée de 3 de v2 vers v3
+Poussée de 3 de v2 vers v5
+Poussée de 3 de v2 vers v6
+Poussée de 4 de v2 vers v7
+
+Réétiquetage de v2 à hauteur 11
+Poussée de 3 de v2 vers v1
+
+Réétiquetage de v2 à hauteur 11
+
+Réétiquetage de v3 à hauteur 1
+Poussée de 6 de v3 vers v4
+
+Réétiquetage de v3 à hauteur 1
+
+Réétiquetage de v4 à hauteur 1
+Poussée de 7 de v4 vers v9
+
+Réétiquetage de v4 à hauteur 2
+Poussée de 6 de v4 vers v3
+
+Réétiquetage de v4 à hauteur 11
+Poussée de 1 de v4 vers v1
+
+Réétiquetage de v4 à hauteur 11
+
+Réétiquetage de v5 à hauteur 1
+Poussée de 1 de v5 vers v7
+Poussée de 2 de v5 vers v8
+
+Réétiquetage de v6 à hauteur 2
+Poussée de 3 de v6 vers v5
+
+Réétiquetage de v6 à hauteur 2
+
+Réétiquetage de v7 à hauteur 1
+Poussée de 5 de v7 vers v10
+
+Réétiquetage de v7 à hauteur 1
+
+Réétiquetage de v9 à hauteur 1
+Poussée de 7 de v9 vers v10
+
+Réétiquetage de v9 à hauteur 1
+
+Réétiquetage de v3 à hauteur 3
+Poussée de 5 de v3 vers v6
+
+Réétiquetage de v3 à hauteur 11
+Poussée de 1 de v3 vers v1
+
+Réétiquetage de v3 à hauteur 11
+
+Réétiquetage de v8 à hauteur 1
+Poussée de 2 de v8 vers v10
+
+Réétiquetage de v8 à hauteur 1
+
+Réétiquetage de v5 à hauteur 2
+Poussée de 3 de v5 vers v8
+
+Réétiquetage de v5 à hauteur 2
+
+Réétiquetage de v6 à hauteur 3
+Poussée de 5 de v6 vers v5
+
+Réétiquetage de v6 à hauteur 12
+Poussée de 3 de v8 vers v10
+
+Réétiquetage de v8 à hauteur 1
+Poussée de 3 de v5 vers v8
+
+Réétiquetage de v5 à hauteur 12
+Poussée de 2 de v5 vers v2
+
+Réétiquetage de v5 à hauteur 12
+Poussée de 1 de v8 vers v10
+
+Réétiquetage de v8 à hauteur 2
+Poussée de 2 de v8 vers v7
+
+Réétiquetage de v8 à hauteur 2
+Poussée de 2 de v2 vers v1
+
+Réétiquetage de v2 à hauteur 11
+Poussée de 2 de v7 vers v10
+
+Réétiquetage de v7 à hauteur 1
+
+Flot final (format flot/capacité) :
+            s       a       b       c       d       e       f       g       h       t
+s           0     11/16    2/3     7/8      0       0       0       0       0       0
+a           0       0      3/3      0      1/3     3/3     4/4      0       0       0
+b           0       0       0      0/7      0      5/5      0       0       0       0
+c           0       0       0       0       0       0       0       0      7/7      0
+d           0       0       0       0       0       0      1/1     8/8      0       0
+e           0       0       0       0      8/8      0       0       0       0       0
+f           0       0       0       0       0       0       0       0       0      7/8
+g           0       0       0       0       0       0      2/3      0      0/4     6/6
+h           0       0       0       0       0      0/4      0       0       0      7/8
+t           0       0       0       0       0       0       0       0       0       0
+
+Flot maximal trouvé: 20
+
+Flot final (format flot/capacité) :
+            s       a       b       c       d       e       f       g       h       t
+s           0     11/16    2/3     7/8      0       0       0       0       0       0
+a           0       0      3/3      0      1/3     3/3     4/4      0       0       0
+b           0       0       0      0/7      0      5/5      0       0       0       0    
+c           0       0       0       0       0       0       0       0      7/7      0
+d           0       0       0       0       0       0      1/1     8/8      0       0
+e           0       0       0       0      8/8      0       0       0       0       0
+f           0       0       0       0       0       0       0       0       0      7/8
+g           0       0       0       0       0       0      2/3      0      0/4     6/6
+h           0       0       0       0       0      0/4      0       0       0      7/8
+t           0       0       0       0       0       0       0       0       0       0
+Temps d'exécution : 0.0163 s

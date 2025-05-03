@@ -1,0 +1,94 @@
+Matrice des capacités :
+        s    a    b    c    d    e    f    t
+s       0    5    8    4    0    0    0    0
+a       0    0    4    0    7    0    0    0
+b       0    0    0    0    0    7    8    0
+c       0    0    7    0    0    0    4    0
+d       0    0    0    0    0    6    0    0
+e       0    0    0    0    0    0    0    7
+f       0    0    0    0    0    0    0    10
+t       0    0    0    0    0    0    0    0
+
+Début de l'algorithme Pousser-Réétiqueter
+
+Réétiquetage de v2 à hauteur 1
+Poussée de 4 de v2 vers v3
+Poussée de 1 de v2 vers v5
+
+Réétiquetage de v3 à hauteur 1
+Poussée de 7 de v3 vers v6
+Poussée de 5 de v3 vers v7
+
+Réétiquetage de v4 à hauteur 1
+Poussée de 4 de v4 vers v7
+
+Réétiquetage de v4 à hauteur 2
+
+Réétiquetage de v5 à hauteur 1
+Poussée de 1 de v5 vers v6
+
+Réétiquetage de v5 à hauteur 1
+
+Réétiquetage de v6 à hauteur 1
+Poussée de 7 de v6 vers v8
+
+Réétiquetage de v6 à hauteur 2
+Poussée de 1 de v6 vers v3
+
+Réétiquetage de v6 à hauteur 2
+
+Réétiquetage de v7 à hauteur 1
+Poussée de 9 de v7 vers v8
+
+Réétiquetage de v7 à hauteur 1
+
+Réétiquetage de v3 à hauteur 2
+Poussée de 1 de v3 vers v2
+
+Réétiquetage de v3 à hauteur 2
+
+Réétiquetage de v2 à hauteur 2
+Poussée de 1 de v2 vers v5
+
+Réétiquetage de v2 à hauteur 2
+
+Réétiquetage de v5 à hauteur 3
+Poussée de 1 de v5 vers v2
+
+Réétiquetage de v5 à hauteur 3
+
+Réétiquetage de v2 à hauteur 3
+Poussée de 1 de v2 vers v3
+
+Réétiquetage de v2 à hauteur 4
+Poussée de 1 de v3 vers v7
+
+Réétiquetage de v3 à hauteur 2
+Poussée de 1 de v7 vers v8
+
+Réétiquetage de v7 à hauteur 3
+
+Flot final (format flot/capacité) :
+            s       a       b       c       d       e       f       t
+s           0      5/5     8/8     4/4      0       0       0       0
+a           0       0      4/4      0      1/7      0       0       0
+b           0       0       0       0       0      6/7     6/8      0
+c           0       0      0/7      0       0       0      4/4      0
+d           0       0       0       0       0      1/6      0       0
+e           0       0       0       0       0       0       0      7/7
+f           0       0       0       0       0       0       0     10/10
+t           0       0       0       0       0       0       0       0
+
+Flot maximal trouvé: 17
+
+Flot final (format flot/capacité) :
+            s       a       b       c       d       e       f       t
+s           0      5/5     8/8     4/4      0       0       0       0    
+a           0       0      4/4      0      1/7      0       0       0
+b           0       0       0       0       0      6/7     6/8      0
+c           0       0      0/7      0       0       0      4/4      0
+d           0       0       0       0       0      1/6      0       0
+e           0       0       0       0       0       0       0      7/7
+f           0       0       0       0       0       0       0     10/10
+t           0       0       0       0       0       0       0       0
+Temps d'exécution : 0.0097 s

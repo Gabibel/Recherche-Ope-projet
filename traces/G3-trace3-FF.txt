@@ -1,0 +1,120 @@
+Matrice des capacités :
+        s    a    b    c    d    e    f    t
+s       0    5    8    4    0    0    0    0  
+a       0    0    4    0    7    0    0    0
+b       0    0    0    0    0    7    8    0
+c       0    0    7    0    0    0    4    0
+d       0    0    0    0    0    6    0    0
+e       0    0    0    0    0    0    0    7
+f       0    0    0    0    0    0    0    10
+t       0    0    0    0    0    0    0    0
+
+Début de l'algorithme Ford-Fulkerson
+
+⋆ Itération 1:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+def : Π(d) = a , Π(e) = b , Π(f) = b
+t : Π(t) = e
+Chaîne améliorante trouvée: s → b → e → t de flot 7
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    t
+s       0    5    1    4    0    0    0    0
+a       0    0    4    0    7    0    0    0
+b       7    0    0    0    0    0    8    0
+c       0    0    7    0    0    0    4    0
+d       0    0    0    0    0    6    0    0
+e       0    0    7    0    0    0    0    0
+f       0    0    0    0    0    0    0    10
+t       0    0    0    0    0    7    0    0
+
+⋆ Itération 2:
+Parcours en largeur :
+s :
+abc : Π(a) = s , Π(b) = s , Π(c) = s
+df : Π(d) = a , Π(f) = b
+et : Π(e) = d , Π(t) = f
+Chaîne améliorante trouvée: s → b → f → t de flot 1
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   t
+s     0   5   0   4   0   0   0   0
+a     0   0   4   0   7   0   0   0
+b     8   0   0   0   0   0   7   0
+c     0   0   7   0   0   0   4   0
+d     0   0   0   0   0   6   0   0
+e     0   0   7   0   0   0   0   0
+f     0   0   1   0   0   0   0   9
+t     0   0   0   0   0   7   1   0
+
+⋆ Itération 3:
+Parcours en largeur :
+s :
+ac : Π(a) = s , Π(c) = s
+bdf : Π(b) = a , Π(d) = a , Π(f) = c
+et : Π(e) = d , Π(t) = f
+Chaîne améliorante trouvée: s → c → f → t de flot 4
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   t
+s     0   5   0   0   0   0   0   0
+a     0   0   4   0   7   0   0   0
+b     8   0   0   0   0   0   7   0
+c     4   0   7   0   0   0   0   0
+d     0   0   0   0   0   6   0   0
+e     0   0   7   0   0   0   0   0
+f     0   0   1   4   0   0   0   5
+t     0   0   0   0   0   7   5   0
+
+⋆ Itération 4:
+Parcours en largeur :
+s :
+a : Π(a) = s
+bd : Π(b) = a , Π(d) = a
+ef : Π(e) = d , Π(f) = b
+ct : Π(c) = f , Π(t) = f
+Chaîne améliorante trouvée: s → a → b → f → t de flot 4
+Matrice résiduelle après modification :
+      s   a   b   c   d   e   f   t
+s     0   1   0   0   0   0   0   0
+a     4   0   0   0   7   0   0   0
+b     8   4   0   0   0   0   3   0
+c     4   0   7   0   0   0   0   0
+d     0   0   0   0   0   6   0   0
+e     0   0   7   0   0   0   0   0
+f     0   0   5   4   0   0   0   1
+t     0   0   0   0   0   7   9   0
+
+⋆ Itération 5:
+Parcours en largeur :
+s :
+a : Π(a) = s
+d : Π(d) = a
+e : Π(e) = d
+b : Π(b) = e
+f : Π(f) = b
+ct : Π(c) = f , Π(t) = f
+Chaîne améliorante trouvée: s → a → d → e → b → f → t de flot 1
+Matrice résiduelle après modification :
+        s    a    b    c    d    e    f    t
+s       0    0    0    0    0    0    0    0
+a       5    0    0    0    6    0    0    0
+b       8    4    0    0    0    1    2    0
+c       4    0    7    0    0    0    0    0
+d       0    1    0    0    0    5    0    0
+e       0    0    6    0    1    0    0    0
+f       0    0    6    4    0    0    0    0
+t       0    0    0    0    0    7    10   0
+
+Flot maximal trouvé: 17
+
+Flot final (format flot/capacité) :
+            s       a       b       c       d       e       f       t
+s           0      5/5     8/8     4/4      0       0       0       0
+a           0       0      4/4      0      1/7      0       0       0
+b           0       0       0       0       0      6/7     6/8      0
+c           0       0      0/7      0       0       0      4/4      0
+d           0       0       0       0       0      1/6      0       0
+e           0       0       0       0       0       0       0      7/7
+f           0       0       0       0       0       0       0     10/10
+t           0       0       0       0       0       0       0       0
+Temps d'exécution : 0.0083 s
