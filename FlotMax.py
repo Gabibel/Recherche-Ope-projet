@@ -1,6 +1,5 @@
 from collections import deque
 
-# Fonction BFS modifiée avec affichage des parents
 def bfs(graphe, parent):
     visite = [False] * graphe.n
     queue = deque([graphe.source])
@@ -18,18 +17,13 @@ def bfs(graphe, parent):
     return False
 
 def afficher_parcours_largeur(graphe, parent):
-    # Création d'une liste pour stocker les sommets par niveau
     niveaux = {}
-    
-    # Utilisation des noms des sommets
     noms = graphe.noms_sommets()
 
     for v in range(graphe.n):
-        # Le niveau d'un sommet est le nombre de sa distance du sommet source (s)
-        if parent[v] != -1:  # Ignorer les sommets sans parent (source)
+        if parent[v] != -1: 
             niveau = 0
             u = v
-            # Calcul du niveau de chaque sommet en remontant le parent
             while parent[u] != -1:
                 niveau += 1
                 u = parent[u]
@@ -37,20 +31,15 @@ def afficher_parcours_largeur(graphe, parent):
                 niveaux[niveau] = []
             niveaux[niveau].append(v)
 
-    # Affichage des résultats
+    
     print("Parcours en largeur :")
-    # Afficher le sommet source (s) sans parent
     print(f"s :")
-
-    # Afficher les niveaux suivants
     for niveau in sorted(niveaux.keys()):
-        # Remplacer les indices par les noms des sommets
         ligne = "".join(
             [noms[v] if v != 0 and v != graphe.n-1 else ('s' if v == 0 else 't') 
              for v in niveaux[niveau]]
         )
         
-        # Affichage des parents des sommets (en utilisant les noms)
         parents = " , ".join(
             [f"Π({noms[v]}) = {noms[parent[v]]}" if v != 0 and v != graphe.n-1 
              else (f"Π({('s' if v == 0 else 't')}) = {'-' if parent[v] == -1 else noms[parent[v]]}")
@@ -59,7 +48,6 @@ def afficher_parcours_largeur(graphe, parent):
         
         print(f"{ligne} : {parents}")
 
-    # Pour t, ajouter le parent
     if graphe.n-1 in parent and parent[graphe.n-1] != -1:
         print(f"t : Π(t) = {noms[parent[graphe.n-1]]}")
 
