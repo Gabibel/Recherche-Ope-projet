@@ -101,42 +101,78 @@ def generer_et_tracer_nuage_de_points(n):
     plt.show()
 
 
-#generer_et_tracer_nuage_de_points(400)
+def tracer_graphique_maximum():
+    fichiers_csv = [
+        "resultats_n_10.csv",
+        "resultats_n_20.csv",
+        "resultats_n_40.csv",
+        "resultats_n_100.csv",
+        "resultats_n_400.csv"
+    ]
 
 
-fichiers_csv = [
-    "resultats_n_10.csv",
-    "resultats_n_20.csv",
-    "resultats_n_40.csv",
-    "resultats_n_100.csv",
-    "resultats_n_400.csv"
-]
+    n_values = []
+    max_ford_fulkerson = []
+    max_push_relabel = []
+    max_flot_min = []
 
 
-n_values = []
-max_ford_fulkerson = []
-max_push_relabel = []
-max_flot_min = []
+    for fichier in fichiers_csv:
+
+        n = int(fichier.split("_")[2].split(".")[0])
+        n_values.append(n)
+        data = pd.read_csv(fichier, encoding="latin1")
+        max_ford_fulkerson.append(data["Ford-Fulkerson"].max())
+        max_push_relabel.append(data["Push-Relabel"].max())
+        max_flot_min.append(data["Flot Min"].max())
 
 
-for fichier in fichiers_csv:
+    plt.figure(figsize=(10, 6))
+    plt.plot(n_values, max_ford_fulkerson, label="Ford-Fulkerson", marker="o", color="blue")
+    plt.plot(n_values, max_push_relabel, label="Push-Relabel", marker="o", color="green")
+    plt.plot(n_values, max_flot_min, label="Flot Min", marker="o", color="red")
 
-    n = int(fichier.split("_")[2].split(".")[0])
-    n_values.append(n)
-    data = pd.read_csv(fichier, encoding="latin1")
-    max_ford_fulkerson.append(data["Ford-Fulkerson"].max())
-    max_push_relabel.append(data["Push-Relabel"].max())
-    max_flot_min.append(data["Flot Min"].max())
+    plt.xlabel("Taille du graphe (n)")
+    plt.ylabel("Temps d'exécution maximal (secondes)")
+    plt.title("Temps d'exécution maximal des algorithmes en fonction de n")
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+def tracer_graphique_ratio():
+    fichiers_csv = [
+        "resultats_n_10.csv",
+        "resultats_n_20.csv",
+        "resultats_n_40.csv",
+        "resultats_n_100.csv",
+        "resultats_n_400.csv"
+    ]
+    n_values = []
+    max_ford_fulkerson = []
+    max_push_relabel = []
+    ratios = []
+
+    for fichier in fichiers_csv:
+        n = int(fichier.split("_")[2].split(".")[0])
+        n_values.append(n)
+
+        data = pd.read_csv(fichier, encoding="latin1")
+        max_ff = data["Ford-Fulkerson"].max()
+        max_pr = data["Push-Relabel"].max()
+
+        max_ford_fulkerson.append(max_ff)
+        max_push_relabel.append(max_pr)
+        ratios.append(max_ff / max_pr)
+    plt.figure(figsize=(10, 6))
+    plt.plot(n_values, ratios, label="Ratio FF / PR", marker="o", color="red", linestyle="--")
+    plt.xlabel("Taille du graphe (n)")
+    plt.ylabel("Valeurs maximales et ratio")
+    plt.title("Comparaison des algorithmes Ford-Fulkerson et Push-Relabel")
+    plt.legend()
+    plt.grid()
+    plt.show()
 
 
-plt.figure(figsize=(10, 6))
-plt.plot(n_values, max_ford_fulkerson, label="Ford-Fulkerson", marker="o", color="blue")
-plt.plot(n_values, max_push_relabel, label="Push-Relabel", marker="o", color="green")
-plt.plot(n_values, max_flot_min, label="Flot Min", marker="o", color="red")
-
-plt.xlabel("Taille du graphe (n)")
-plt.ylabel("Temps d'exécution maximal (secondes)")
-plt.title("Temps d'exécution maximal des algorithmes en fonction de n")
-plt.legend()
-plt.grid()
-plt.show()
+generer_et_tracer_nuage_de_points(10)
+#tracer_graphique_maximum()
+#tracer_graphique_ratio()
