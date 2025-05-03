@@ -1,10 +1,24 @@
 import numpy as np
 
 class Graph:
-    def __init__(self, filename):
-        self.GrapheFichier(filename)
+    def __init__(self, filename=None, n=None, C=None, D=None):
+        if filename:
+            self.GrapheFichier(filename)  # Si un fichier est donné, on charge les données à partir du fichier
+        elif n and C is not None and D is not None:
+            # Sinon, on initialise avec des matrices de capacités et de coûts fournies
+            self.c = C
+            self.cout = D
+            self.n = n
+            self.source = 0
+            self.g = n - 1
+            self.flot = np.zeros((n, n), dtype=int)
+            self.reste = np.copy(C)
+            self.valeur_flot=0
+        else:
+            raise ValueError("Il faut soit fournir un fichier, soit les matrices et n.")
 
     def GrapheFichier(self, filename):
+        # Cette méthode reste la même, utilisée si on veut charger à partir d'un fichier
         with open(filename, 'r') as f:
             lines = f.readlines()
 
