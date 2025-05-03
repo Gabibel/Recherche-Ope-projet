@@ -70,6 +70,7 @@ def generer_et_tracer_nuage_de_points(n):
     print(f"Génération du graphe pour n = {n}")
     # nombre aleatoire
     graphe = generate_random_graphe(n)  # Utilise la fonction que tu as écrite
+    compteur=0
 
     # Répéter num_tests fois le test pour chaque algorithme
     for _ in range(num_tests):
@@ -77,6 +78,8 @@ def generer_et_tracer_nuage_de_points(n):
         temps_ford_fulkerson_individual.append(time_execution_ford_fulkerson(graphe))
         temps_push_relabel_individual.append(time_execution_push_relabel(graphe))
         temps_flot_min_individual.append(time_execution_flotmin(graphe))
+        compteur+=1
+        print('-----------------------------',compteur,"-----------------------------")
 
     # nuage de points
     plt.figure(figsize=(10, 6))
@@ -98,4 +101,4 @@ def generer_et_tracer_nuage_de_points(n):
     plt.show()
 
 
-generer_et_tracer_nuage_de_points(100) # a faire avec tt les nombres demandés
+generer_et_tracer_nuage_de_points(20) # a faire avec tt les nombres demandés
