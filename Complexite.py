@@ -30,34 +30,32 @@ def generate_random_graphe(n):  # n représente le nombre de sommets
     return graphe
 
 def time_execution_ford_fulkerson(graphe):
-    firsttime= time.perf_counter()
+    firsttime = time.perf_counter()
     FlotMax.ford_fulkerson(graphe)
-    secondtime=time.perf_counter()
-    timeexecution=firsttime-secondtime
-    print(" La durée pour ce graphe avec ford_fulkerson est de  ",timeexecution)
+    secondtime = time.perf_counter()
+    timeexecution = secondtime - firsttime  # Correction ici
+    print(" La durée pour ce graphe avec ford_fulkerson est de  ", timeexecution)
     return timeexecution
+
 def time_execution_push_relabel(graphe):
     firsttime = time.perf_counter()
     FlotMax.push_relabel(graphe)
     secondtime = time.perf_counter()
-    timeexecution = firsttime - secondtime
+    timeexecution = secondtime - firsttime  # Correction ici
     print(" La durée pour ce graphe avec push_relabel est de  ", timeexecution)
     return timeexecution
+
 def time_execution_flotmin(graphe):
     reseau = Flotmin.ReseauFlot(
         capacites=graphe.c.tolist(),
         couts=graphe.cout.tolist(),
         noms=graphe.noms_sommets(),
         val_flot=graphe.valeur_flot
-
     )
     firsttime = time.perf_counter()
-
-
     reseau.resoudre()
-
     secondtime = time.perf_counter()
-    timeexecution = firsttime - secondtime
+    timeexecution = secondtime - firsttime  # Correction ici
     print(" La durée pour ce graphe avec flot min est de  ", timeexecution)
     return timeexecution
 
@@ -73,32 +71,31 @@ def generer_et_tracer_nuage_de_points(n):
     # nombre aleatoire
     graphe = generate_random_graphe(n)  # Utilise la fonction que tu as écrite
 
-    # Répéter 100 fois le test pour chaque algorithme
+    # Répéter num_tests fois le test pour chaque algorithme
     for _ in range(num_tests):
         # on calcule les temps
         temps_ford_fulkerson_individual.append(time_execution_ford_fulkerson(graphe))
-
         temps_push_relabel_individual.append(time_execution_push_relabel(graphe))
-
-
         temps_flot_min_individual.append(time_execution_flotmin(graphe))
 
-
-    # nuage
+    # nuage de points
     plt.figure(figsize=(10, 6))
 
-    plt.scatter( num_tests, temps_ford_fulkerson_individual, color='blue', label='Ford-Fulkerson')
-    plt.scatter( num_tests, temps_push_relabel_individual, color='green', label='Pousser-Réétiqueter')
-    plt.scatter( num_tests, temps_flot_min_individual, color='red', label='Flot à coût minimal')
+    # Utiliser une valeur constante pour l'axe x
+    x_values = [n] * num_tests  # Tous les points auront x = n
+
+    plt.scatter(x_values, temps_ford_fulkerson_individual, color='blue', label='Ford-Fulkerson')
+    plt.scatter(x_values, temps_push_relabel_individual, color='green', label='Pousser-Réétiqueter')
+    plt.scatter(x_values, temps_flot_min_individual, color='red', label='Flot à coût minimal')
 
     # Ajouter des labels et un titre
     plt.xlabel("Taille du graphe (n)")
     plt.ylabel("Temps d'exécution (secondes)")
-    plt.title("Nuages de points des temps d'exécution par algorithme")
+    plt.title("Temps d'exécution des algorithmes pour n = {}".format(n))
     plt.legend()
 
     # Afficher le graphique
     plt.show()
 
 
-generer_et_tracer_nuage_de_points(10) # a faire avec tt les nombres demandés
+generer_et_tracer_nuage_de_points(100) # a faire avec tt les nombres demandés
